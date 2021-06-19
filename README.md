@@ -1,6 +1,6 @@
 # @tinyhttp/cli
 
-The [tinyhttp](https://github.com/talentlessguy/tinyhttp) CLI.
+The [tinyhttp](https://github.com/talentlessguy/tinyhttp) CLI to quick-start new projects.
 
 ## Install
 
