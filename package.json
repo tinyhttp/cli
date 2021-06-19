@@ -41,7 +41,9 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "test": "esmo node_modules/uvu/bin.js"
+    "test": "esmo node_modules/uvu/bin.js",
+    "lint": "eslint . --ext=ts",
+    "format": "prettier --check \"./**/*.{ts}\""
   },
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",
