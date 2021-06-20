@@ -45,7 +45,7 @@
     "test:coverage": "c8 --include=src pnpm test",
     "test:report": "c8 report --reporter=text-lcov > coverage.lcov",
     "lint": "eslint . --ext=ts",
-    "format": "prettier --check \"./**/*.{ts}\""
+    "format": "prettier --check \"./**/*.ts\""
   },
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",
