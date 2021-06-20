@@ -15,7 +15,6 @@ specifiers:
   eslint: ^7.29.0
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^3.4.0
-  esmo: ^0.7.3
   httpie: ^1.1.2
   ora: ^5.4.0
   prettier: ^2.3.1
@@ -44,7 +43,6 @@ devDependencies:
   eslint: 7.29.0
   eslint-config-prettier: 8.3.0_eslint@7.29.0
   eslint-plugin-prettier: 3.4.0_de2986b0c29d2faa795004f5443c76d1
-  esmo: 0.7.3
   prettier: 2.3.1
   rollup: 2.52.1
   typescript: 4.3.4
@@ -825,13 +823,6 @@ packages:
       esbuild: 0.12.9
     dev: true
 
-  /esbuild-register/2.6.0:
-    resolution: {integrity: sha512-2u4AtnCXP5nivtIxZryiZOUcEQkOzFS7UhAqibUEmaTAThJ48gDLYTBF/Fsz+5r0hbV1jrFE6PQvPDUrKZNt/Q==}
-    dependencies:
-      esbuild: 0.12.9
-      jsonc-parser: 3.0.0
-    dev: true
-
   /esbuild/0.12.9:
     resolution: {integrity: sha512-MWRhAbMOJ9RJygCrt778rz/qNYgA4ZVj6aXnNPxFjs7PmIpb0fuB9Gmg5uWrr6n++XKwwm/RmSz6RR5JL2Ocsw==}
     hasBin: true
@@ -960,16 +951,6 @@ packages:
       v8-compile-cache: 2.3.0
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /esmo/0.7.3:
-    resolution: {integrity: sha512-icDOL8+15hESxH8EAZM4GtwUqr0stXbq9u+kwzFQa04qzrNU5ziEvmsxr10AYuiJWUmcQbr5ruvjw8OC0vkhxg==}
-    hasBin: true
-    dependencies:
-      cross-spawn: 7.0.3
-      esbuild: 0.12.9
-      esbuild-node-loader: 0.1.1
-      esbuild-register: 2.6.0
     dev: true
 
   /espree/7.3.1:
@@ -1682,10 +1663,6 @@ packages:
 
   /json-stable-stringify-without-jsonify/1.0.1:
     resolution: {integrity: sha1-nbe1lJatPzz+8wp1FC0tkwrXJlE=}
-    dev: true
-
-  /jsonc-parser/3.0.0:
-    resolution: {integrity: sha512-fQzRfAbIBnR0IQvftw9FJveWiHp72Fg20giDrHz6TdfB12UH/uue0D3hm57UB5KgAVuniLMCaS8P1IMj9NR7cA==}
     dev: true
 
   /kind-of/3.2.2:
