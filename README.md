@@ -34,12 +34,6 @@ Some flags help you to quickly create popular tool configurations for Node.js pr
 - `--eslint-ts` - creates an ESLint config for a TypeScript project (and installs ESLint, Prettier, TypeScript and plugins)
 - `--full` - `--prettier` and `--eslint` combined
 
-### Example
-
-```sh
-tinyhttp new basic my-app --full
-```
-
 [site-url]: https://tinyhttp.v1rtl.site
 [npm-url]: https://npmjs.com/package/@tinyhttp/cli
 [github-actions]: https://github.com/tinyhttp/cli/actions
