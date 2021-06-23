@@ -1,9 +1,9 @@
 import { suite } from 'uvu'
 import path from 'path'
 import { expect } from 'earljs'
-import { rm, readdir, mkdir, readFile } from 'fs/promises'
+import { rm, mkdir, readFile } from 'fs/promises'
 import { exec } from 'child_process'
-import { runCmd, setPackageJsonName, setupEslint } from '../src/utils'
+import { runCmd, setPackageJsonName } from '../src/utils'
 
 const FIXTURES_PATH = path.join(process.cwd(), 'tests/fixtures')
 
