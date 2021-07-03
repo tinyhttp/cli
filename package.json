@@ -32,11 +32,11 @@
   "author": "v1rtl",
   "license": "MIT",
   "dependencies": {
-    "cac": "^6.7.2",
+    "cac": "^6.7.3",
     "colorette": "^1.2.2",
     "edit-json-file": "^1.6.0",
     "httpie": "^1.1.2",
-    "ora": "^5.4.0",
+    "ora": "^5.4.1",
     "which-pm-runs": "^1.0.0"
   },
   "scripts": {
@@ -52,17 +52,17 @@
     "@rollup/plugin-typescript": "^8.2.1",
     "@types/edit-json-file": "^1.4.0",
     "@types/which-pm-runs": "^1.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.27.0",
-    "@typescript-eslint/parser": "^4.27.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
     "c8": "^7.7.3",
     "earljs": "^0.1.10",
     "esbuild-node-loader": "^0.1.1",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "prettier": "^2.3.1",
-    "rollup": "^2.52.1",
-    "typescript": "^4.3.4",
+    "prettier": "^2.3.2",
+    "rollup": "^2.52.7",
+    "typescript": "^4.3.5",
     "uvu": "^0.5.1"
   }
 }

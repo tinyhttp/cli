@@ -36,12 +36,12 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 14.x
 
       - name: install pnpm
         uses: pnpm/action-setup@v2.0.1
         with:
-          version: 6.7.6
+          version: 6.x
 
       - name: setup pnpm config
         run: pnpm config set store-dir $PNPM_CACHE_FOLDER
