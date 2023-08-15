@@ -19,7 +19,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=12.4"
+    "node": ">=16.8"
   },
   "keywords": [
     "tinyhttp",
@@ -32,37 +32,35 @@
   "author": "v1rtl",
   "license": "MIT",
   "dependencies": {
-    "cac": "^6.7.3",
-    "colorette": "^1.2.2",
-    "edit-json-file": "^1.6.0",
-    "httpie": "^1.1.2",
-    "ora": "^5.4.1",
-    "which-pm-runs": "^1.0.0"
+    "cac": "^6.7.14",
+    "colorette": "^2.0.20",
+    "edit-json-file": "^1.7.0",
+    "ora": "^7.0.1",
+    "undici": "^5.23.0",
+    "which-pm-runs": "^1.1.0"
   },
   "scripts": {
-    "build": "rollup -c",
-    "test": "node --experimental-loader esbuild-node-loader node_modules/uvu/bin.js tests",
+    "build": "esbuild src/index.ts --outdir=dist --platform=node --target=node18 --format=esm --packages=external --bundle",
+    "test": "uvu -r tsm tests",
     "test:coverage": "c8 --include=src pnpm test",
     "test:report": "c8 report --reporter=text-lcov > coverage.lcov",
     "lint": "eslint . --ext=ts",
     "format": "prettier --check \"./**/*.ts\""
   },
   "devDependencies": {
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-typescript": "^8.2.1",
-    "@types/edit-json-file": "^1.4.0",
+    "@types/edit-json-file": "^1.7.0",
+    "@types/node": "^20.5.0",
     "@types/which-pm-runs": "^1.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.28.1",
-    "@typescript-eslint/parser": "^4.28.1",
-    "c8": "^7.7.3",
-    "earljs": "^0.1.10",
-    "esbuild-node-loader": "^0.1.1",
-    "eslint": "^7.29.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "prettier": "^2.3.2",
-    "rollup": "^2.52.7",
-    "typescript": "^4.3.5",
-    "uvu": "^0.5.1"
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.4.0",
+    "c8": "^8.0.1",
+    "esbuild": "^0.19.2",
+    "eslint": "^8.47.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.2",
+    "tsm": "^2.3.0",
+    "typescript": "^5.1.6",
+    "uvu": "^0.5.6"
   }
 }

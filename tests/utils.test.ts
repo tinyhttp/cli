@@ -1,15 +1,24 @@
-import { suite } from 'uvu'
+import { Context, suite, uvu } from 'uvu'
 import path from 'path'
-import { expect } from 'earljs'
-import { rm, mkdir, readFile } from 'fs/promises'
-import { exec } from 'child_process'
+import { strictEqual } from 'node:assert/strict'
+import { rm, mkdir, readFile, access, constants } from 'node:fs/promises'
+import { exec } from 'node:child_process'
 import { runCmd, setPackageJsonName } from '../src/utils'
 
 const FIXTURES_PATH = path.join(process.cwd(), 'tests/fixtures')
 
 const MOD_PATH = path.join(FIXTURES_PATH, 'test')
 
-function describe(name: string, fn: (...args: any[]) => any) {
+const exists = async (path: string) => {
+  try {
+    await access(path, constants.F_OK)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
+function describe(name: string, fn: (it: uvu.Test<Context>) => any) {
   const x = suite(name)
   fn(x)
   x.run()
@@ -22,32 +31,36 @@ describe('runCmd(cmd)', (it) => {
     let syncStdout = ''
 
     exec('pwd', (_, stdout) => (syncStdout += stdout)).on('close', () => {
-      expect(stdout).toEqual(syncStdout)
+      strictEqual(stdout, syncStdout)
     })
   })
 })
 
 describe('setPackageJsonName(name)', (it) => {
-  let cwd: string
-  it('sets name correctly', async () => {
-    const name = 'aTestName'
-    cwd = process.cwd()
+  const cwd = process.cwd()
 
+  it.before(async () => {
     await mkdir(MOD_PATH)
     process.chdir(MOD_PATH)
+  })
 
-    await runCmd('pnpm init -y')
+  it.after(async () => {
+    process.chdir(cwd)
+    await rm(MOD_PATH, { recursive: true, force: true })
+  })
+
+  it('sets name correctly', async () => {
+    const name = 'aTestName'
+
+    await runCmd('pnpm init')
 
     setPackageJsonName(name)
     const pkgJSON = await readFile('package.json')
     const { name: packageName } = JSON.parse(pkgJSON.toString())
-    expect(packageName).toEqual(name)
-
-    // Cleanup
-    process.chdir(cwd)
-    await rm(MOD_PATH, { recursive: true, force: true })
+    strictEqual(packageName, name)
   })
 })
+
 /* describe('install(pkgManager, ...pkgs)', () => {
   let cwd: string
   beforeEach(async () => {

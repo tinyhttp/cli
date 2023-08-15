@@ -1,10 +1,10 @@
 import { writeFile, mkdir } from 'fs/promises'
 import ora from 'ora'
-import { get } from 'httpie'
+import { fetch, RequestInit } from 'undici'
 import editPkgJson from 'edit-json-file'
 import * as colorette from 'colorette'
-import { exec } from 'child_process'
-import { promisify } from 'util'
+import { exec } from 'node:child_process'
+import { promisify } from 'node:util'
 
 export const msg = (m: string, color: string) => console.log(colorette[color](m))
 
@@ -13,7 +13,7 @@ export const runCmd = promisify(exec)
 export const install = async (pkg: string, pkgs: string[], dev = true) =>
   await runCmd(`${pkg} ${pkg === 'yarn' ? 'add' : 'i'} ${dev ? '-D' : '-S'} ${pkgs.join(' ')}`)
 
-const httpHeaders = {
+export const httpHeaders: RequestInit = {
   headers: { 'user-agent': 'node.js' }
 }
 
@@ -28,8 +28,8 @@ export const fileFetcher = async (data: any, statusCode: number, dir?: string) =
   for (const { name, download_url, type, url } of data) {
     if (type !== 'dir') {
       spinner.text = `Fetching ${name} file`
-      const { data } = await get(download_url, httpHeaders)
-
+      const res = await fetch(download_url, httpHeaders)
+      const data = (await res.json()) as string
       try {
         await writeFile(dir ? `${dir}/${name}` : name, data)
       } catch {
@@ -42,8 +42,9 @@ export const fileFetcher = async (data: any, statusCode: number, dir?: string) =
       } catch {
         throw new Error('Failed to create a project subdirectory')
       }
-      const { data, statusCode } = await get(url, httpHeaders)
-      await fileFetcher(data, statusCode, name)
+      const res = await fetch(url, httpHeaders)
+      const data = await res.json()
+      await fileFetcher(data, res.status, name)
     }
   }
 

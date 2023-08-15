@@ -1,10 +1,12 @@
+#!/usr/bin/env node
+
 import cac from 'cac'
 import pm from 'which-pm-runs'
 import { mkdir, writeFile } from 'fs/promises'
-import { get } from 'httpie'
+import { fetch } from 'undici'
 import editPkgJson from 'edit-json-file'
 
-import { installPackages, fileFetcher, install, setupEslint, msg, setPackageJsonName } from './utils'
+import { installPackages, fileFetcher, install, setupEslint, msg, setPackageJsonName, httpHeaders } from './utils'
 
 const ESLINT_TS_CONFIG = `
 {
@@ -42,10 +44,6 @@ const PRETTIER_CONFIG = `
   "tabWidth": 2
 }
 `
-
-const httpHeaders = {
-  headers: { 'user-agent': 'node.js' }
-}
 
 const cli = cac('tinyhttp')
 
@@ -85,12 +83,16 @@ cli
 
     process.chdir(dir)
 
-    const { data, statusCode } = await get(
+    const res = await fetch(
       `https://api.github.com/repos/talentlessguy/tinyhttp/contents/examples/${name}`,
       httpHeaders
     )
 
-    await fileFetcher(data, statusCode)
+    const data = await res.json()
+
+    if (res.status === 404) return console.error(`Template ${name} not found`)
+
+    await fileFetcher(data, res.status)
 
     // CLI options
 
