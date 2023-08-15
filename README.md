@@ -10,6 +10,8 @@ The [tinyhttp](https://github.com/talentlessguy/tinyhttp) CLI to quick-start new
 
 ## Install
 
+Node.js 16.8+ is required.
+
 ```sh
 pnpm i -g @tinyhttp/cli
 ```
