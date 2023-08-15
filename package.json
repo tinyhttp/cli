@@ -13,7 +13,7 @@
     "url": "https://github.com/tinyhttp/cli.git"
   },
   "bin": {
-    "tinyhttp": "dist/index.js"
+    "tinyhttp": "./dist/index.js"
   },
   "files": [
     "dist"
