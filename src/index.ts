@@ -2,7 +2,7 @@
 
 import cac from 'cac'
 import pm from 'which-pm-runs'
-import { mkdir, writeFile } from 'fs/promises'
+import { mkdir, writeFile } from 'node:fs/promises'
 import { fetch } from 'undici'
 import editPkgJson from 'edit-json-file'
 

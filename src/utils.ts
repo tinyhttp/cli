@@ -1,4 +1,4 @@
-import { writeFile, mkdir } from 'fs/promises'
+import { writeFile, mkdir } from 'node:fs/promises'
 import ora from 'ora'
 import { fetch, RequestInit } from 'undici'
 import editPkgJson from 'edit-json-file'
