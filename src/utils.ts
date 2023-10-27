@@ -1,12 +1,9 @@
 import { writeFile, mkdir } from 'node:fs/promises'
 import ora from 'ora'
-import { fetch, RequestInit } from 'undici'
 import editPkgJson from 'edit-json-file'
 import * as colorette from 'colorette'
 import { exec } from 'node:child_process'
 import { promisify } from 'node:util'
-
-export const msg = (m: string, color: string) => console.log(colorette[color](m))
 
 export const runCmd = promisify(exec)
 
@@ -17,7 +14,9 @@ export const httpHeaders: RequestInit = {
   headers: { 'user-agent': 'node.js' }
 }
 
-export const fileFetcher = async (data: any, statusCode: number, dir?: string) => {
+export type GithubFile = { name: string; download_url: string; type: string; url: string }
+
+export const fileFetcher = async (data: GithubFile[], statusCode: number, dir?: string) => {
   const spinner = ora()
 
   spinner.start(colorette.blue(`Fetching ${data.length} files...`))
@@ -43,7 +42,7 @@ export const fileFetcher = async (data: any, statusCode: number, dir?: string) =
         throw new Error('Failed to create a project subdirectory')
       }
       const res = await fetch(url, httpHeaders)
-      const data = await res.json()
+      const data = (await res.json()) as GithubFile[]
       await fileFetcher(data, res.status, name)
     }
   }
@@ -62,7 +61,7 @@ export const installPackages = async (pkg: string) => {
 
   const thDeps = allDeps.filter((x) => x.startsWith('@tinyhttp'))
 
-  const newDeps = {}
+  const newDeps: Record<string, string> = {}
 
   for (const dep of thDeps) newDeps[dep] = 'latest'
 
@@ -87,35 +86,6 @@ export const installPackages = async (pkg: string) => {
   }
 
   spinner.stop()
-}
-
-const ESLINT_JS_CONFIG = `
-{
-  "env": {
-    "es6": true,
-    "node": true
-  },
-  "parserOptions": {
-    "ecmaVersion": 2020,
-    "sourceType": "module"
-  },
-  "plugins": ["prettier"],
-  "extends": ["eslint:recommended", "prettier"],
-}
-`
-
-export const setupEslint = async (pkg: string) => {
-  msg(`Setting up ESLint`, 'green')
-  try {
-    await install(pkg, ['eslint', 'prettier', 'eslint-config-prettier', 'eslint-plugin-prettier'], true)
-  } catch {
-    throw new Error('Failed to install ESLint')
-  }
-  try {
-    await writeFile('.eslintrc', ESLINT_JS_CONFIG)
-  } catch {
-    throw new Error('Failed to create ESLint config')
-  }
 }
 
 export const setPackageJsonName = (name: string) => {

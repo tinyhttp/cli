@@ -13,7 +13,7 @@ The [tinyhttp](https://github.com/talentlessguy/tinyhttp) CLI to quick-start new
 Node.js 16.8+ is required.
 
 ```sh
-pnpm i -g @tinyhttp/cli
+bun i -g @tinyhttp/cli
 ```
 
 ## Usage
@@ -32,13 +32,6 @@ tinyhttp new basic my-app
 #### Flags
 
 - `--pkg` - custom package manager to use for running installation commands.
-
-Some flags help you to quickly create popular tool configurations for Node.js projects so you don't have to write them from scratch.
-
-- `--prettier` - creates a Prettier config (and installs Prettier)
-- `--eslint` - creates an ESLint config (and installs ESLint, Prettier and plugins)
-- `--eslint-ts` - creates an ESLint config for a TypeScript project (and installs ESLint, Prettier, TypeScript and plugins)
-- `--full` - `--prettier` and `--eslint` combined
 
 [npm-url]: https://npmjs.com/package/@tinyhttp/cli
 [github-actions]: https://github.com/tinyhttp/cli/actions

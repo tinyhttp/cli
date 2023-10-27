@@ -1,21 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES2019",
-    "module": "ESNext",
-    "declaration": true,
-    "preserveSymlinks": true,
-    "outDir": "dist",
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "downlevelIteration": true,
-    "noUnusedLocals": false,
-    "noImplicitAny": false,
-    "noUnusedParameters": true,
-    "preserveConstEnums": true,
+    "module": "NodeNext",
+    "target": "esnext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
     "skipLibCheck": true,
-    "moduleResolution": "Node",
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true
-  },
-  "exclude": ["dist"]
+    "types": [
+      "bun-types" // add Bun global
+    ],
+    "lib": ["DOM"]
+  }
 }

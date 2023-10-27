@@ -1,30 +1,15 @@
-import { Context, suite, uvu } from 'uvu'
-import path from 'path'
+import { describe, it, beforeAll, afterAll } from 'bun:test'
+import * as path from 'node:path'
 import { strictEqual } from 'node:assert/strict'
-import { rm, mkdir, readFile, access, constants } from 'node:fs/promises'
+import { rm, mkdir, readFile } from 'node:fs/promises'
 import { exec } from 'node:child_process'
-import { runCmd, setPackageJsonName } from '../src/utils'
+import { runCmd, setPackageJsonName } from '../src/utils.js'
 
 const FIXTURES_PATH = path.join(process.cwd(), 'tests/fixtures')
 
 const MOD_PATH = path.join(FIXTURES_PATH, 'test')
 
-const exists = async (path: string) => {
-  try {
-    await access(path, constants.F_OK)
-    return true
-  } catch (e) {
-    return false
-  }
-}
-
-function describe(name: string, fn: (it: uvu.Test<Context>) => any) {
-  const x = suite(name)
-  fn(x)
-  x.run()
-}
-
-describe('runCmd(cmd)', (it) => {
+describe('runCmd(cmd)', () => {
   it('should work the same as child_process.exec(cmd)', async () => {
     const { stdout } = await runCmd('pwd')
 
@@ -36,15 +21,15 @@ describe('runCmd(cmd)', (it) => {
   })
 })
 
-describe('setPackageJsonName(name)', (it) => {
+describe('setPackageJsonName(name)', () => {
   const cwd = process.cwd()
 
-  it.before(async () => {
+  beforeAll(async () => {
     await mkdir(MOD_PATH)
     process.chdir(MOD_PATH)
   })
 
-  it.after(async () => {
+  afterAll(async () => {
     process.chdir(cwd)
     await rm(MOD_PATH, { recursive: true, force: true })
   })
