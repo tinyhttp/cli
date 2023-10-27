@@ -1,4 +1,4 @@
-import { describe, it, beforeAll, afterAll } from 'bun:test'
+import { describe, it, before, after } from 'node:test'
 import * as path from 'node:path'
 import { strictEqual } from 'node:assert/strict'
 import { rm, mkdir, readFile } from 'node:fs/promises'
@@ -24,12 +24,12 @@ describe('runCmd(cmd)', () => {
 describe('setPackageJsonName(name)', () => {
   const cwd = process.cwd()
 
-  beforeAll(async () => {
+  before(async () => {
     await mkdir(MOD_PATH)
     process.chdir(MOD_PATH)
   })
 
-  afterAll(async () => {
+  after(async () => {
     process.chdir(cwd)
     await rm(MOD_PATH, { recursive: true, force: true })
   })
