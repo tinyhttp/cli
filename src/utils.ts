@@ -25,22 +25,25 @@ export const fileFetcher = async (data: GithubFile[], statusCode: number, dir?: 
 
   // Download files
   for (const { name, download_url, type, url } of data) {
-    if (type !== 'dir') {
+    if (type === 'file') {
       spinner.text = `Fetching ${name} file`
+
       const res = await fetch(download_url, httpHeaders)
-      const data = (await res.json()) as string
+      const data = (await res.text()) as string
+
       try {
         await writeFile(dir ? `${dir}/${name}` : name, data)
       } catch {
         throw new Error('Failed to create a project file')
       }
-    } else {
+    } else if (type === 'dir') {
       spinner.text = `Scanning ${name} directory`
       try {
         await mkdir(name)
       } catch {
         throw new Error('Failed to create a project subdirectory')
       }
+      
       const res = await fetch(url, httpHeaders)
       const data = (await res.json()) as GithubFile[]
       await fileFetcher(data, res.status, name)
