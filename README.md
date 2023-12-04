@@ -2,7 +2,7 @@
 
 # @tinyhttp/cli
 
-[![npm](https://img.shields.io/npm/dt/@tinyhttp/cli?style=for-the-badge&color=hotpink)][npm-url] [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/tinyhttp/tinyhttp/CI?style=for-the-badge&logo=github&label=&color=hotpink)][github-actions] [![Coverage][cov-img]][cov-url] [![](https://img.shields.io/badge/donate-DEV-hotpink?style=for-the-badge)](https://stakes.social/0x14308514785B216904a41aB817282d25425Cce39)
+[![npm](https://img.shields.io/npm/dt/@tinyhttp/cli?style=for-the-badge&color=hotpink)][npm-url] [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/tinyhttp/cli/main.yml?style=for-the-badge&logo=github&label=&color=hotpink)][github-actions] [![Coverage][cov-img]][cov-url] [![](https://img.shields.io/badge/donate-DEV-hotpink?style=for-the-badge)](https://stakes.social/0x14308514785B216904a41aB817282d25425Cce39)
 
 </div>
 
